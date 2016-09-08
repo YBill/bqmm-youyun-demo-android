@@ -1,0 +1,18 @@
+[
+    {
+        "merged": "D:\\projects\\android\\studio\\workspace\\bqmm-youyun-demo-android\\BQMM_Lib\\build\\intermediates\\res\\merged\\release\\layout\\bqmm_message_view_right.xml",
+        "source": "D:\\projects\\android\\studio\\workspace\\bqmm-youyun-demo-android\\BQMM_Lib\\res\\layout\\bqmm_message_view_right.xml"
+    },
+    {
+        "merged": "D:\\projects\\android\\studio\\workspace\\bqmm-youyun-demo-android\\BQMM_Lib\\build\\intermediates\\res\\merged\\release\\layout\\bqmm_message_view_left.xml",
+        "source": "D:\\projects\\android\\studio\\workspace\\bqmm-youyun-demo-android\\BQMM_Lib\\res\\layout\\bqmm_message_view_left.xml"
+    },
+    {
+        "merged": "D:\\projects\\android\\studio\\workspace\\bqmm-youyun-demo-android\\BQMM_Lib\\build\\intermediates\\res\\merged\\release\\layout\\bqmm_item_face.xml",
+        "source": "D:\\projects\\android\\studio\\workspace\\bqmm-youyun-demo-android\\BQMM_Lib\\res\\layout\\bqmm_item_face.xml"
+    },
+    {
+        "merged": "D:\\projects\\android\\studio\\workspace\\bqmm-youyun-demo-android\\BQMM_Lib\\build\\intermediates\\res\\merged\\release\\layout\\bqmm_item_emoji.xml",
+        "source": "D:\\projects\\android\\studio\\workspace\\bqmm-youyun-demo-android\\BQMM_Lib\\res\\layout\\bqmm_item_emoji.xml"
+    }
+]

@@ -1,0 +1,50 @@
+[
+    {
+        "merged": "D:\\projects\\android\\studio\\workspace\\bqmm-youyun-demo-android\\BQMM_Lib\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-hdpi-v4\\bqmm_emoji_eo_fail_default.png",
+        "source": "D:\\projects\\android\\studio\\workspace\\bqmm-youyun-demo-android\\BQMM_Lib\\build\\intermediates\\bundles\\debug\\res\\drawable-hdpi-v4\\bqmm_emoji_eo_fail_default.png"
+    },
+    {
+        "merged": "D:\\projects\\android\\studio\\workspace\\bqmm-youyun-demo-android\\BQMM_Lib\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-hdpi-v4\\ic_launcher.png",
+        "source": "D:\\projects\\android\\studio\\workspace\\bqmm-youyun-demo-android\\BQMM_Lib\\build\\intermediates\\bundles\\debug\\res\\drawable-hdpi-v4\\ic_launcher.png"
+    },
+    {
+        "merged": "D:\\projects\\android\\studio\\workspace\\bqmm-youyun-demo-android\\BQMM_Lib\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-hdpi-v4\\bqmm_chatto_bg_focused.9.png",
+        "source": "D:\\projects\\android\\studio\\workspace\\bqmm-youyun-demo-android\\BQMM_Lib\\build\\intermediates\\bundles\\debug\\res\\drawable-hdpi-v4\\bqmm_chatto_bg_focused.9.png"
+    },
+    {
+        "merged": "D:\\projects\\android\\studio\\workspace\\bqmm-youyun-demo-android\\BQMM_Lib\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-hdpi-v4\\bqmm_emoji_loadfail.png",
+        "source": "D:\\projects\\android\\studio\\workspace\\bqmm-youyun-demo-android\\BQMM_Lib\\build\\intermediates\\bundles\\debug\\res\\drawable-hdpi-v4\\bqmm_emoji_loadfail.png"
+    },
+    {
+        "merged": "D:\\projects\\android\\studio\\workspace\\bqmm-youyun-demo-android\\BQMM_Lib\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-hdpi-v4\\bqmm_keyboard_store_bg.png",
+        "source": "D:\\projects\\android\\studio\\workspace\\bqmm-youyun-demo-android\\BQMM_Lib\\build\\intermediates\\bundles\\debug\\res\\drawable-hdpi-v4\\bqmm_keyboard_store_bg.png"
+    },
+    {
+        "merged": "D:\\projects\\android\\studio\\workspace\\bqmm-youyun-demo-android\\BQMM_Lib\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-hdpi-v4\\bqmm_emoji_loading.png",
+        "source": "D:\\projects\\android\\studio\\workspace\\bqmm-youyun-demo-android\\BQMM_Lib\\build\\intermediates\\bundles\\debug\\res\\drawable-hdpi-v4\\bqmm_emoji_loading.png"
+    },
+    {
+        "merged": "D:\\projects\\android\\studio\\workspace\\bqmm-youyun-demo-android\\BQMM_Lib\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-hdpi-v4\\bqmm_chatfrom_bg_normal.9.png",
+        "source": "D:\\projects\\android\\studio\\workspace\\bqmm-youyun-demo-android\\BQMM_Lib\\build\\intermediates\\bundles\\debug\\res\\drawable-hdpi-v4\\bqmm_chatfrom_bg_normal.9.png"
+    },
+    {
+        "merged": "D:\\projects\\android\\studio\\workspace\\bqmm-youyun-demo-android\\BQMM_Lib\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-hdpi-v4\\bqmm_setting2x.png",
+        "source": "D:\\projects\\android\\studio\\workspace\\bqmm-youyun-demo-android\\BQMM_Lib\\build\\intermediates\\bundles\\debug\\res\\drawable-hdpi-v4\\bqmm_setting2x.png"
+    },
+    {
+        "merged": "D:\\projects\\android\\studio\\workspace\\bqmm-youyun-demo-android\\BQMM_Lib\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-hdpi-v4\\bqmm_emoji_delete_img.png",
+        "source": "D:\\projects\\android\\studio\\workspace\\bqmm-youyun-demo-android\\BQMM_Lib\\build\\intermediates\\bundles\\debug\\res\\drawable-hdpi-v4\\bqmm_emoji_delete_img.png"
+    },
+    {
+        "merged": "D:\\projects\\android\\studio\\workspace\\bqmm-youyun-demo-android\\BQMM_Lib\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-hdpi-v4\\bqmm_chatto_bg_normal.9.png",
+        "source": "D:\\projects\\android\\studio\\workspace\\bqmm-youyun-demo-android\\BQMM_Lib\\build\\intermediates\\bundles\\debug\\res\\drawable-hdpi-v4\\bqmm_chatto_bg_normal.9.png"
+    },
+    {
+        "merged": "D:\\projects\\android\\studio\\workspace\\bqmm-youyun-demo-android\\BQMM_Lib\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-hdpi-v4\\bqmm_chatfrom_bg_focused.9.png",
+        "source": "D:\\projects\\android\\studio\\workspace\\bqmm-youyun-demo-android\\BQMM_Lib\\build\\intermediates\\bundles\\debug\\res\\drawable-hdpi-v4\\bqmm_chatfrom_bg_focused.9.png"
+    },
+    {
+        "merged": "D:\\projects\\android\\studio\\workspace\\bqmm-youyun-demo-android\\BQMM_Lib\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-hdpi-v4\\bqmm_back.png",
+        "source": "D:\\projects\\android\\studio\\workspace\\bqmm-youyun-demo-android\\BQMM_Lib\\build\\intermediates\\bundles\\debug\\res\\drawable-hdpi-v4\\bqmm_back.png"
+    }
+]

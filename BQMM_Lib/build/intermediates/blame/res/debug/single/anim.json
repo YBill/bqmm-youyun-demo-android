@@ -1,0 +1,18 @@
+[
+    {
+        "merged": "D:\\projects\\android\\studio\\workspace\\bqmm-youyun-demo-android\\BQMM_Lib\\build\\intermediates\\res\\merged\\debug\\anim\\bqmm_slide_out_to_left.xml",
+        "source": "D:\\projects\\android\\studio\\workspace\\bqmm-youyun-demo-android\\BQMM_Lib\\res\\anim\\bqmm_slide_out_to_left.xml"
+    },
+    {
+        "merged": "D:\\projects\\android\\studio\\workspace\\bqmm-youyun-demo-android\\BQMM_Lib\\build\\intermediates\\res\\merged\\debug\\anim\\bqmm_slide_in_from_left.xml",
+        "source": "D:\\projects\\android\\studio\\workspace\\bqmm-youyun-demo-android\\BQMM_Lib\\res\\anim\\bqmm_slide_in_from_left.xml"
+    },
+    {
+        "merged": "D:\\projects\\android\\studio\\workspace\\bqmm-youyun-demo-android\\BQMM_Lib\\build\\intermediates\\res\\merged\\debug\\anim\\bqmm_slide_in_from_right.xml",
+        "source": "D:\\projects\\android\\studio\\workspace\\bqmm-youyun-demo-android\\BQMM_Lib\\res\\anim\\bqmm_slide_in_from_right.xml"
+    },
+    {
+        "merged": "D:\\projects\\android\\studio\\workspace\\bqmm-youyun-demo-android\\BQMM_Lib\\build\\intermediates\\res\\merged\\debug\\anim\\bqmm_slide_out_to_right.xml",
+        "source": "D:\\projects\\android\\studio\\workspace\\bqmm-youyun-demo-android\\BQMM_Lib\\res\\anim\\bqmm_slide_out_to_right.xml"
+    }
+]
