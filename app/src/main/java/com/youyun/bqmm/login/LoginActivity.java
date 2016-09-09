@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.youyun.bqmm.R;
@@ -17,6 +18,7 @@ import com.youyun.bqmm.receive.ReceiveRunnable;
 public class LoginActivity extends AppCompatActivity implements LoginView {
 
     private Button loginBtn;
+    private ProgressBar progressBar;
     private LoginPresenter presenter;
 
     @Override
@@ -44,6 +46,7 @@ public class LoginActivity extends AppCompatActivity implements LoginView {
     private void initView() {
         setToolBar();
         loginBtn = (Button) findViewById(R.id.btn_login);
+        progressBar = (ProgressBar) findViewById(R.id.progressbar);
     }
 
     private void setToolBar() {
@@ -66,5 +69,15 @@ public class LoginActivity extends AppCompatActivity implements LoginView {
     @Override
     public void loginFail() {
         Toast.makeText(this, "登录失败", Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void showProgress() {
+        progressBar.setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    public void hideProgress() {
+        progressBar.setVisibility(View.GONE);
     }
 }

@@ -8,4 +8,8 @@ public interface LoginView {
     void loginSuccess();
 
     void loginFail();
+
+    void showProgress();
+
+    void hideProgress();
 }

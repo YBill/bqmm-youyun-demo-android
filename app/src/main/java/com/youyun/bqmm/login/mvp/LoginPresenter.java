@@ -28,6 +28,7 @@ public class LoginPresenter {
      * 登录
      */
     public void login() {
+        loginView.showProgress();
         new Thread(new Runnable() {
             @Override
             public void run() {
@@ -52,6 +53,7 @@ public class LoginPresenter {
         handler.post(new Runnable() {
             @Override
             public void run() {
+                loginView.hideProgress();
                 if (result)
                     loginView.loginSuccess();
                 else

@@ -1,14 +1,21 @@
 package com.youyun.bqmm.chat;
 
+import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Rect;
+import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewTreeObserver;
 import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.CheckBox;
@@ -21,6 +28,7 @@ import com.melink.bqmmsdk.sdk.BQMM;
 import com.melink.bqmmsdk.sdk.BQMMMessageHelper;
 import com.melink.bqmmsdk.sdk.IBqmmSendMessageListener;
 import com.melink.bqmmsdk.ui.keyboard.BQMMKeyboard;
+import com.melink.bqmmsdk.ui.keyboard.IBQMMUnicodeEmojiProvider;
 import com.melink.bqmmsdk.widget.BQMMEditView;
 import com.melink.bqmmsdk.widget.BQMMSendButton;
 import com.youyun.bqmm.R;
@@ -49,6 +57,7 @@ public class ChatActivity extends AppCompatActivity implements ChatView {
     private BQMMEditView bqmmEditView;
     private TextView titleText;
 
+    private boolean mPendingShowPlaceHolder;
     private InputMethodManager manager;
     private String toUid;
     private ChatPresenter presenter;
@@ -86,9 +95,47 @@ public class ChatActivity extends AppCompatActivity implements ChatView {
         BQMM.getInstance().setKeyboard(bqmmKeyboard);
         BQMM.getInstance().setSendButton(bqmmSend);
         BQMM.getInstance().load();
+        UnicodeToEmoji.initPhotos(this);
+        BQMM.getInstance().setUnicodeEmojiProvider(new IBQMMUnicodeEmojiProvider() {
+            @Override
+            public Drawable getDrawableFromCodePoint(int i) {
+                return UnicodeToEmoji.EmojiImageSpan.getEmojiDrawable(i);
+            }
+        });
     }
 
     private void addListener() {
+        bqmmEditView.getViewTreeObserver().addOnPreDrawListener(new ViewTreeObserver.OnPreDrawListener() {
+            @Override
+            public boolean onPreDraw() {
+                // Keyboard -> BQMM
+                if (mPendingShowPlaceHolder) {
+                    // 在设置mPendingShowPlaceHolder时已经调用了隐藏Keyboard的方法，直到Keyboard隐藏前都取消重绘
+                    if (isSoftInputShown()) {
+                        /*ViewGroup.LayoutParams params = bqmmKeyboard.getLayoutParams();
+                        int distance = getSupportSoftInputHeight();
+                        // 调整PlaceHolder高度
+                        if (distance != params.height) {
+                            params.height = distance;
+                            bqmmKeyboard.setLayoutParams(params);
+                        }*/
+                        return false;
+                    } else {
+                        mRealListView.setSelection(mRealListView.getAdapter().getCount() - 1);
+                        bqmmKeyboard.showKeyboard();
+                        mPendingShowPlaceHolder = false;
+                        return false;
+                    }
+                } else {//BQMM -> Keyboard
+                    if (bqmmKeyboard.isKeyboardVisible() && isSoftInputShown()) {
+                        mRealListView.setSelection(mRealListView.getAdapter().getCount() - 1);
+                        bqmmKeyboard.hideKeyboard();
+                        return false;
+                    }
+                }
+                return true;
+            }
+        });
         bqmmEditView.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
@@ -99,8 +146,13 @@ public class ChatActivity extends AppCompatActivity implements ChatView {
         bqmmKeyboardOpen.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                hideKeyboard();
-                if (!bqmmKeyboard.isKeyboardVisible()) {
+                if (bqmmKeyboard.isKeyboardVisible()) { // PlaceHolder -> Keyboard
+                    showSoftInput(bqmmEditView);
+                } else if (isSoftInputShown()) { // Keyboard -> PlaceHolder
+                    mPendingShowPlaceHolder = true;
+                    hideSoftInput(bqmmEditView);
+                } else { // Just show PlaceHolder
+                    mRealListView.setSelection(mRealListView.getAdapter().getCount() - 1);
                     bqmmKeyboard.showKeyboard();
                 }
             }
@@ -112,7 +164,7 @@ public class ChatActivity extends AppCompatActivity implements ChatView {
                 if (bqmmKeyboard.isKeyboardVisible()) {
                     bqmmKeyboard.hideKeyboard();
                 }
-                hideKeyboard();
+                closebroad();
                 return false;
             }
         });
@@ -200,15 +252,15 @@ public class ChatActivity extends AppCompatActivity implements ChatView {
 
     @Override
     public void sendEmoji(boolean result, String emojiJson, long time) {
-        if(result){
+        if (result) {
             try {
                 MessageEntity message = new MessageEntity();
                 JSONObject obj = new JSONObject(emojiJson);
                 String categary = obj.optString("categary");
-                if(YouyunUtils.EMOJITYPE.equals(categary)){
+                if (YouyunUtils.EMOJITYPE.equals(categary)) {
                     // 图文混排
                     message.setEmojiType(YouyunUtils.EMOJITYPE);
-                }else{
+                } else {
                     // 单表情
                     message.setEmojiType(YouyunUtils.FACETYPE);
                 }
@@ -233,12 +285,93 @@ public class ChatActivity extends AppCompatActivity implements ChatView {
     }
 
     /**
-     * 隐藏键盘
+     * 关闭软键盘或表情
      */
-    private void hideKeyboard() {
-        if (getWindow().getAttributes().softInputMode != WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN) {
-            if (getCurrentFocus() != null)
-                manager.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
+    private void closebroad() {
+        if (bqmmKeyboard.isKeyboardVisible()) {
+            bqmmKeyboard.hideKeyboard();
+        } else if (isSoftInputShown()) {
+            hideSoftInput(bqmmEditView);
+        }
+    }
+
+    /**
+     * 编辑框获取焦点，并显示软件盘
+     */
+    private void showSoftInput(View view) {
+        view.requestFocus();
+        manager.showSoftInput(view, 0);
+    }
+
+    /**
+     * 隐藏软件盘
+     */
+    private void hideSoftInput(View view) {
+        manager.hideSoftInputFromWindow(view.getWindowToken(), 0);
+    }
+
+    /**
+     * 是否显示软件盘
+     *
+     * @return
+     */
+    private boolean isSoftInputShown() {
+        return getSupportSoftInputHeight() != 0;
+    }
+
+    /**
+     * 获取软件盘的高度
+     *
+     * @return
+     */
+    private int getSupportSoftInputHeight() {
+        Rect r = new Rect();
+        /**
+         * decorView是window中的最顶层view，可以从window中通过getDecorView获取到decorView。
+         * 通过decorView获取到程序显示的区域，包括标题栏，但不包括状态栏。
+         */
+        getWindow().getDecorView().getWindowVisibleDisplayFrame(r);
+        //获取屏幕的高度
+        int screenHeight = getWindow().getDecorView().getRootView().getHeight();
+        //计算软件盘的高度
+        int softInputHeight = screenHeight - r.bottom;
+
+        /**
+         * 某些Android版本下，没有显示软键盘时减出来的高度总是144，而不是零，
+         * 这是因为高度是包括了虚拟按键栏的(例如华为系列)，所以在API Level高于20时，
+         * 我们需要减去底部虚拟按键栏的高度（如果有的话）
+         */
+        if (Build.VERSION.SDK_INT >= 20) {
+            // When SDK Level >= 20 (Android L), the softInputHeight will contain the height of softButtonsBar (if has)
+            Log.d("Bill", "getSoftButtonsBarHeight:" + getSoftButtonsBarHeight());
+            softInputHeight = softInputHeight - getSoftButtonsBarHeight();
+        }
+
+        if (softInputHeight < 0) {
+            Log.w("Bill", "EmotionKeyboard--Warning: value of softInputHeight is below zero!");
+        }
+        Log.d("Bill", "softInputHeight:" + softInputHeight);
+        return softInputHeight;
+    }
+
+    /**
+     * 底部虚拟按键栏的高度
+     *
+     * @return
+     */
+    @TargetApi(Build.VERSION_CODES.JELLY_BEAN_MR1)
+    private int getSoftButtonsBarHeight() {
+        DisplayMetrics metrics = new DisplayMetrics();
+        //这个方法获取可能不是真实屏幕的高度
+        getWindowManager().getDefaultDisplay().getMetrics(metrics);
+        int usableHeight = metrics.heightPixels;
+        //获取当前屏幕的真实高度
+        getWindowManager().getDefaultDisplay().getRealMetrics(metrics);
+        int realHeight = metrics.heightPixels;
+        if (realHeight > usableHeight) {
+            return realHeight - usableHeight;
+        } else {
+            return 0;
         }
     }
 
