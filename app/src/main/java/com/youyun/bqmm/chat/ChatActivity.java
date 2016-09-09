@@ -79,6 +79,7 @@ public class ChatActivity extends AppCompatActivity implements ChatView {
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        BQMM.getInstance().destory();
         presenter.onDestroy();
     }
 
